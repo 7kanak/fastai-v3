@@ -32,9 +32,9 @@ async def setup_learner():
     await download_file(export_file_url, path/export_file_name)
     await download_file(export_file_url2, path/export_file_name2)
     try:
-        data_lm2 = load_data(path, export_file_name2)
-        learn = language_model_learner(data_lm2, AWD_LSTM, drop_mult=0.5)
-        learn.load(export_file_name)
+        #data_lm2 = load_data(path, export_file_name2)
+        #learn = language_model_learner(data_lm2, AWD_LSTM, drop_mult=0.5)
+        #learn.load(export_file_name)
         return 0
     except RuntimeError as e:
         if len(e.args) > 0 and 'CPU-only machine' in e.args[0]:
