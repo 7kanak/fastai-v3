@@ -9,8 +9,10 @@ from fastai import *
 from fastai.vision import *
 
 # export_file_url = 'https://www.dropbox.com/s/v6cuuvddq73d1e0/export.pkl?raw=1'
-export_file_url = 'https://www.dropbox.com/s/6bgq8t6yextloqp/export.pkl?raw=1'
-export_file_name = 'export.pkl'
+export_file_url = 'https://drive.google.com/uc?export=download&id=1B8IZXkHKPSl9xfr_xracE4K3Ee0SYSE9'
+export_file_name = 'model.pth'
+export_file_url2 = 'https://drive.google.com/uc?export=download&id=1676PCFeIcw6N7xwZa-CdmJokFJGlIbv5'
+export_file_name2 = 'lm.pkl'
 
 classes = ['black', 'grizzly', 'teddys']
 path = Path(__file__).parent
