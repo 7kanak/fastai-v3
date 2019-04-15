@@ -35,7 +35,7 @@ async def setup_learner():
         data_lm2 = load_data(path, export_file_name2)
         learn = language_model_learner(data_lm2, AWD_LSTM, drop_mult=0.5)
         learn.load(export_file_name)
-        return learn
+        return 0
     except RuntimeError as e:
         if len(e.args) > 0 and 'CPU-only machine' in e.args[0]:
             print(e)
