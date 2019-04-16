@@ -29,6 +29,7 @@ async def download_file(url, dest):
             with open(dest, 'wb') as f: f.write(data)
 
 async def setup_learner():
+    print(1)
     await download_file(export_file_url, path/export_file_name)
     await download_file(export_file_url2, path/export_file_name2)
     try:
