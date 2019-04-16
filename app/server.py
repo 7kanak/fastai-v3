@@ -4,6 +4,7 @@ from starlette.staticfiles import StaticFiles
 from starlette.middleware.cors import CORSMiddleware
 import uvicorn, aiohttp, asyncio
 from io import BytesIO
+import pandas as pd
 
 from fastai import *
 from fastai.text import * 
@@ -11,8 +12,9 @@ from fastai.text import *
 #export_file_url = 'https://www.dropbox.com/s/v6cuuvddq73d1e0/export.pkl?raw=1'
 export_file_url = 'https://drive.google.com/uc?export=download&id=1B8IZXkHKPSl9xfr_xracE4K3Ee0SYSE9'
 export_file_name = 'model'
-export_file_url2 = 'https://drive.google.com/uc?export=download&id=1676PCFeIcw6N7xwZa-CdmJokFJGlIbv5'
-export_file_name2 = 'lm'
+#export_file_url2 = 'https://drive.google.com/uc?export=download&id=1676PCFeIcw6N7xwZa-CdmJokFJGlIbv5'
+export_file_url2 = 'https://drive.google.com/uc?export=download&id=1--CL5qUrcIEKfZ9EuGfsZS8y2mi-rsIO'
+export_file_name2 = 'lm.csv'
 
 #classes = ['black', 'grizzly', 'teddys']
 path = Path(__file__).parent
@@ -33,7 +35,10 @@ async def setup_learner():
     await download_file(export_file_url, path/export_file_name)
     await download_file(export_file_url2, path/export_file_name2)
     try:
-        data_lm2 = load_data(path, export_file_name2)
+        df = pd.read_csv(path/export_file_name2)
+        my_tokenizer = Tokenizer(tok_func=BaseTokenizer,pre_rules=[],post_rules=[],special_cases=[UNK,PAD,BOS])
+        data_lm2 = TextLMDataBunch.from_df(path,train_df=df,text_cols=0,tokenizer=my_tokenizer,bptt=140)
+        
         learn = language_model_learner(data_lm2, AWD_LSTM, drop_mult=0.5)
         learn.load(export_file_name)
         return learn
