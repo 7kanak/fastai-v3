@@ -66,24 +66,16 @@ def predict(learn, text:str, n_words:int=10,  no_unk:bool=True, min_p:float=None
   res = " , ".join(res)
   return  res
 
+
 #@app.route('/')
 #def index(request):
 #    html = path/'view'/'index.html'
 #    return HTMLResponse(html.open().read())
 
+
 @app.route('/')
-def homepage(request):
-    return PlainTextResponse('Hello, world!')
-
-@app.route('/url/{urlid}')
-async def url(request):
-    urlid = request.path_params['urlid']
-    prediction = predict(learn,data)
-    return JSONResponse({'result': str(prediction)})
-
-@app.route('/analyze', methods=['GET'])
 async def analyze(request):
-    data = await request.body()
+    data = await request.form()
     #img_bytes = await (data['file'].read())
     #img = open_image(BytesIO(img_bytes))
     prediction = predict(learn,data)
